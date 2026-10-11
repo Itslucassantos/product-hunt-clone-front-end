@@ -8,7 +8,8 @@
     "categories": "Categorias",
     "about": "Sobre",
     "logIn": "Entrar",
-    "signUp": "Registro"
+    "signUp": "Registro",
+    "logOut": "Sair"
   },
   "header": {
     "homeLabel": "P.H CLONE, página inicial",
@@ -23,6 +24,51 @@
   },
   "errors": {
     "INTERNAL_ERROR": "Algo deu errado.",
-    "NETWORK_ERROR": "Não foi possível acessar o servidor. Verifique sua conexão."
+    "NETWORK_ERROR": "Não foi possível acessar o servidor. Verifique sua conexão.",
+    "auth": {
+      "invalidCredentials": "E-mail ou senha incorretos.",
+      "emailRequired": "Digite seu e-mail.",
+      "emailInvalid": "Digite um e-mail válido.",
+      "emailTaken": "Este e-mail já está cadastrado.",
+      "passwordRequired": "Digite sua senha.",
+      "passwordTooShort": "Use pelo menos 8 caracteres.",
+      "passwordPwned": "Esta senha apareceu em um vazamento de dados. Escolha outra.",
+      "passwordWeak": "Escolha uma senha mais forte. Evite palavras comuns e sequências simples.",
+      "codeRequired": "Digite o código.",
+      "codeIncorrect": "Código incorreto.",
+      "codeExpired": "O código expirou. Envie um novo.",
+      "tooManyRequests": "Muitas tentativas. Tente de novo em instantes.",
+      "unknown": "Algo deu errado. Tente de novo."
+    }
+  },
+  "auth": {
+    "email": "E-mail",
+    "password": "Senha",
+    "code": "Código de verificação",
+    "signIn": {
+      "title": "Entrar",
+      "subtitle": "Que bom ver você de novo.",
+      "submit": "Entrar",
+      "submitting": "Entrando…",
+      "noAccount": "Não tem conta?",
+      "createOne": "Crie uma",
+      "codeSent": "Este é um dispositivo novo. Enviamos um código para {email}. Digite-o para continuar.",
+      "verify": "Verificar e entrar",
+      "verifying": "Verificando…",
+      "resend": "Enviar novo código"
+    },
+    "signUp": {
+      "title": "Crie sua conta",
+      "subtitle": "Vote nos produtos que você gosta.",
+      "submit": "Criar conta",
+      "submitting": "Criando conta…",
+      "passwordHint": "Pelo menos 8 caracteres.",
+      "haveAccount": "Já tem conta?",
+      "logIn": "Entrar",
+      "codeSent": "Enviamos um código para {email}. Digite-o para confirmar seu e-mail.",
+      "verify": "Verificar e-mail",
+      "verifying": "Verificando…",
+      "resend": "Enviar novo código"
+    }
   }
 }

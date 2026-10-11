@@ -6,8 +6,6 @@ import { setRequestLocale } from "next-intl/server";
 import { Bricolage_Grotesque, Instrument_Sans } from "next/font/google";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
-import { Footer } from "@/components/features/Footer";
-import { Header } from "@/components/features/Header";
 import { Providers } from "@/components/Providers";
 import { routing } from "@/i18n/routing";
 import "@/styles/globals.css";
@@ -49,11 +47,7 @@ export default async function LocaleLayout({
       <body className="flex min-h-screen flex-col">
         <ClerkProvider localization={locale === "pt-BR" ? ptBR : enUS}>
           <NextIntlClientProvider>
-            <Providers>
-              <Header />
-              <main className="mx-auto w-full max-w-content flex-1 px-6 py-10">{children}</main>
-              <Footer />
-            </Providers>
+            <Providers>{children}</Providers>
           </NextIntlClientProvider>
         </ClerkProvider>
       </body>
