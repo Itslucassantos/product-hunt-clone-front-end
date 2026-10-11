@@ -51,7 +51,11 @@
       "submit": "Entrar",
       "submitting": "Entrando…",
       "noAccount": "Não tem conta?",
-      "createOne": "Crie uma"
+      "createOne": "Crie uma",
+      "codeSent": "Este é um dispositivo novo. Enviamos um código para {email}. Digite-o para continuar.",
+      "verify": "Verificar e entrar",
+      "verifying": "Verificando…",
+      "resend": "Enviar novo código"
     },
     "signUp": {
       "title": "Crie sua conta",

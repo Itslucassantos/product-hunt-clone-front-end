@@ -51,7 +51,11 @@
       "submit": "Log in",
       "submitting": "Logging in…",
       "noAccount": "Don't have an account?",
-      "createOne": "Create one"
+      "createOne": "Create one",
+      "codeSent": "This is a new device. We sent a code to {email}. Enter it to continue.",
+      "verify": "Verify and log in",
+      "verifying": "Verifying…",
+      "resend": "Send a new code"
     },
     "signUp": {
       "title": "Create your account",
