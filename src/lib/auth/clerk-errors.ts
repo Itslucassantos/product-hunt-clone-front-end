@@ -22,5 +22,9 @@ const KNOWN_ERRORS: Record<string, MappedAuthError> = {
 const UNKNOWN_ERROR: MappedAuthError = { field: null, messageKey: "auth.unknown" };
 
 export function mapClerkError(error: { code?: string } | null | undefined): MappedAuthError {
-  return (error?.code && KNOWN_ERRORS[error.code]) || UNKNOWN_ERROR;
+  const mapped = error?.code ? KNOWN_ERRORS[error.code] : undefined;
+  if (!mapped && process.env.NODE_ENV === "development") {
+    console.error("Unmapped Clerk error:", error);
+  }
+  return mapped ?? UNKNOWN_ERROR;
 }

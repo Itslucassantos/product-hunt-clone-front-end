@@ -156,6 +156,8 @@ export function SignUpForm() {
         onChange={(event) => setPassword(event.target.value)}
         error={errors.password}
       />
+      {/* Mount point for Clerk bot protection (enabled on this instance). */}
+      <div id="clerk-captcha" />
       <Button type="submit" loading={busy} className="w-full">
         {busy ? t("signUp.submitting") : t("signUp.submit")}
       </Button>
