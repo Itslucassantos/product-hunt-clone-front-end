@@ -11,7 +11,9 @@ const KNOWN_ERRORS: Record<string, MappedAuthError> = {
   form_identifier_exists: { field: "email", messageKey: "auth.emailTaken" },
   form_password_length_too_short: { field: "password", messageKey: "auth.passwordTooShort" },
   form_password_pwned: { field: "password", messageKey: "auth.passwordPwned" },
+  form_password_not_strong: { field: "password", messageKey: "auth.passwordWeak" },
   form_password_not_strong_enough: { field: "password", messageKey: "auth.passwordWeak" },
+  form_password_validation_failed: { field: "password", messageKey: "auth.passwordWeak" },
   form_code_incorrect: { field: "code", messageKey: "auth.codeIncorrect" },
   verification_failed: { field: "code", messageKey: "auth.codeIncorrect" },
   verification_expired: { field: "code", messageKey: "auth.codeExpired" },
@@ -21,10 +23,15 @@ const KNOWN_ERRORS: Record<string, MappedAuthError> = {
 
 const UNKNOWN_ERROR: MappedAuthError = { field: null, messageKey: "auth.unknown" };
 
-export function mapClerkError(error: { code?: string } | null | undefined): MappedAuthError {
-  const mapped = error?.code ? KNOWN_ERRORS[error.code] : undefined;
+type ClerkErrorLike = { code?: string; errors?: { code?: string }[] };
+
+export function mapClerkError(error: ClerkErrorLike | null | undefined): MappedAuthError {
+  // API errors may carry the field-level codes in a nested list.
+  const codes = [error?.code, ...(error?.errors?.map((e) => e.code) ?? [])];
+  const known = codes.find((code) => code && KNOWN_ERRORS[code]);
+  const mapped = known ? KNOWN_ERRORS[known] : undefined;
   if (!mapped && process.env.NODE_ENV === "development") {
-    console.error("Unmapped Clerk error:", error);
+    console.error("Unmapped Clerk error:", error?.code, error);
   }
   return mapped ?? UNKNOWN_ERROR;
 }

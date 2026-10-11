@@ -33,7 +33,7 @@
       "passwordRequired": "Enter your password.",
       "passwordTooShort": "Use at least 8 characters.",
       "passwordPwned": "This password appeared in a data breach. Choose a different one.",
-      "passwordWeak": "Choose a stronger password.",
+      "passwordWeak": "Choose a stronger password. Avoid common words and simple sequences.",
       "codeRequired": "Enter the code.",
       "codeIncorrect": "That code is incorrect.",
       "codeExpired": "That code has expired. Send a new one.",

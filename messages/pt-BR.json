@@ -33,7 +33,7 @@
       "passwordRequired": "Digite sua senha.",
       "passwordTooShort": "Use pelo menos 8 caracteres.",
       "passwordPwned": "Esta senha apareceu em um vazamento de dados. Escolha outra.",
-      "passwordWeak": "Escolha uma senha mais forte.",
+      "passwordWeak": "Escolha uma senha mais forte. Evite palavras comuns e sequências simples.",
       "codeRequired": "Digite o código.",
       "codeIncorrect": "Código incorreto.",
       "codeExpired": "O código expirou. Envie um novo.",

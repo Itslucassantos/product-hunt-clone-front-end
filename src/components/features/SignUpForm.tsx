@@ -31,7 +31,7 @@ export function SignUpForm() {
   const [submitting, setSubmitting] = useState(false);
   const busy = submitting || fetchStatus === "fetching";
 
-  function showClerkError(error: { code?: string }) {
+  function showClerkError(error: Parameters<typeof mapClerkError>[0]) {
     const mapped = mapClerkError(error);
     setErrors(
       mapped.field
