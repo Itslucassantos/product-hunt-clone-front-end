@@ -1,0 +1,28 @@
+{
+  "common": {
+    "appName": "P.H CLONE",
+    "tryAgain": "Try again"
+  },
+  "nav": {
+    "products": "Products",
+    "categories": "Categories",
+    "about": "About",
+    "logIn": "Log in",
+    "signUp": "Sign up"
+  },
+  "header": {
+    "homeLabel": "P.H CLONE, home page",
+    "language": "Language",
+    "theme": "Dark mode"
+  },
+  "footer": {
+    "tagline": "Portfolio project · 2026"
+  },
+  "home": {
+    "title": "The Next Big App"
+  },
+  "errors": {
+    "INTERNAL_ERROR": "Something went wrong.",
+    "NETWORK_ERROR": "Could not reach the server. Check your connection."
+  }
+}
