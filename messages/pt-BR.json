@@ -1,0 +1,28 @@
+{
+  "common": {
+    "appName": "P.H CLONE",
+    "tryAgain": "Tentar de novo"
+  },
+  "nav": {
+    "products": "Produtos",
+    "categories": "Categorias",
+    "about": "Sobre",
+    "logIn": "Entrar",
+    "signUp": "Registro"
+  },
+  "header": {
+    "homeLabel": "P.H CLONE, página inicial",
+    "language": "Idioma",
+    "theme": "Modo escuro"
+  },
+  "footer": {
+    "tagline": "Projeto de portfólio · 2026"
+  },
+  "home": {
+    "title": "O Próximo Grande App"
+  },
+  "errors": {
+    "INTERNAL_ERROR": "Algo deu errado.",
+    "NETWORK_ERROR": "Não foi possível acessar o servidor. Verifique sua conexão."
+  }
+}
