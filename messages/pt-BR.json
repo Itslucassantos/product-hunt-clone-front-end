@@ -20,7 +20,14 @@
     "tagline": "Projeto de portfólio · 2026"
   },
   "home": {
-    "title": "O Próximo Grande App"
+    "title": "O Próximo Grande App",
+    "trending": "Tópicos em alta",
+    "allTopics": "Todos",
+    "products": "Produtos",
+    "empty": "Ainda não há produtos aqui.",
+    "reviewed": "Produtos revisados por nós",
+    "comingSoon": "Em breve",
+    "rating": "Nota {rating}/5"
   },
   "errors": {
     "INTERNAL_ERROR": "Algo deu errado.",
@@ -39,7 +46,12 @@
       "codeExpired": "O código expirou. Envie um novo.",
       "tooManyRequests": "Muitas tentativas. Tente de novo em instantes.",
       "unknown": "Algo deu errado. Tente de novo."
-    }
+    },
+    "UNAUTHENTICATED": "Entre para continuar.",
+    "SESSION_EXPIRED": "Sua sessão expirou. Entre de novo.",
+    "PRODUCT_NOT_FOUND": "Produto não encontrado.",
+    "PRODUCT_NOT_VOTABLE": "Este produto ainda não pode receber votos.",
+    "RATE_LIMITED": "Muitas requisições. Tente de novo em instantes."
   },
   "auth": {
     "email": "E-mail",
@@ -70,5 +82,10 @@
       "verifying": "Verificando…",
       "resend": "Enviar novo código"
     }
+  },
+  "vote": {
+    "add": "Votar ({count})",
+    "remove": "Remover voto ({count})",
+    "signInToVote": "Entre para votar ({count})"
   }
 }
