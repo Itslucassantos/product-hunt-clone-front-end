@@ -2,7 +2,12 @@ import type { ProductListItem } from "@/types/api";
 import { ProductImage } from "./ProductImage";
 import { VoteButton } from "./VoteButton";
 
-export function ProductCard({ product }: { product: ProductListItem }) {
+type ProductCardProps = {
+  product: ProductListItem;
+  votes?: "button" | "count";
+};
+
+export function ProductCard({ product, votes = "button" }: ProductCardProps) {
   return (
     <li className="flex items-center gap-4 rounded-2xl border border-border bg-surface p-4">
       <ProductImage id={product.id} src={product.imageUrl} title={product.title} size={64} />
@@ -26,7 +31,16 @@ export function ProductCard({ product }: { product: ProductListItem }) {
         </ul>
       </div>
 
-      <VoteButton productId={product.id} upvotes={product.upvotes} />
+      {votes === "button" ? (
+        <VoteButton productId={product.id} upvotes={product.upvotes} />
+      ) : (
+        <span className="flex min-h-14 min-w-14 shrink-0 flex-col items-center justify-center rounded-xl border border-border-strong px-3 py-2 text-sm font-semibold">
+          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
+            <path d="M12 6 3 18h18z" />
+          </svg>
+          {product.upvotes}
+        </span>
+      )}
     </li>
   );
 }
