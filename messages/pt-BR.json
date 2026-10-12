@@ -87,5 +87,45 @@
     "add": "Votar ({count})",
     "remove": "Remover voto ({count})",
     "signInToVote": "Entre para votar ({count})"
+  },
+  "categories": {
+    "title": "Categorias",
+    "subtitle": "Explore os produtos por tópico.",
+    "productCount": "{count, plural, one {# produto} other {# produtos}}",
+    "mostVoted": "Mais votados em {topic}",
+    "noProducts": "Ainda não há produtos nesta categoria.",
+    "empty": "Ainda não há categorias."
+  },
+  "about": {
+    "title": "Sobre o P.H CLONE",
+    "intro": "O P.H CLONE é um lugar para descobrir novos apps e ferramentas. Os produtos são publicados pela administração, organizados por tópico e ordenados pelos votos da comunidade.",
+    "howItWorks": "Como funciona",
+    "steps": {
+      "publish": {
+        "title": "Produtos são publicados",
+        "text": "A administração publica os produtos, agrupa por tópico e revisa alguns deles com uma nota. Os que ainda vão chegar aparecem como em breve."
+      },
+      "vote": {
+        "title": "Você vota",
+        "text": "Entre na sua conta e vote nos produtos de que gosta. Você tem um voto por produto e pode retirá-lo quando quiser."
+      },
+      "reorder": {
+        "title": "A lista se reordena",
+        "text": "Os votos decidem a ordem: os produtos mais votados vêm primeiro, e a lista se atualiza assim que você vota."
+      }
+    },
+    "portfolio": {
+      "title": "Um projeto de portfólio",
+      "text": "O P.H CLONE é um projeto full-stack de portfólio: um front-end em Next.js conversando com uma API em Express, com as regras de negócio separadas dos frameworks.",
+      "frontend": "Front-end",
+      "backend": "Back-end",
+      "shared": "Autenticação e arquitetura"
+    },
+    "cta": {
+      "title": "Pronto para escolher seus favoritos?",
+      "text": "Crie uma conta para votar nos produtos de que gosta, ou apenas veja o que a comunidade está votando.",
+      "signUp": "Registro",
+      "viewProducts": "Ver produtos"
+    }
   }
 }

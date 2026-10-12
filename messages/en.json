@@ -87,5 +87,45 @@
     "add": "Upvote ({count})",
     "remove": "Remove upvote ({count})",
     "signInToVote": "Log in to upvote ({count})"
+  },
+  "categories": {
+    "title": "Categories",
+    "subtitle": "Browse products by topic.",
+    "productCount": "{count, plural, one {# product} other {# products}}",
+    "mostVoted": "Most voted in {topic}",
+    "noProducts": "No products in this category yet.",
+    "empty": "No categories yet."
+  },
+  "about": {
+    "title": "About P.H CLONE",
+    "intro": "P.H CLONE is a place to discover new apps and tools. Products are published by the administration, organized by topic and ranked by the votes of the community.",
+    "howItWorks": "How it works",
+    "steps": {
+      "publish": {
+        "title": "Products are published",
+        "text": "The administration publishes products, groups them by topic and reviews some of them with a rating. Upcoming ones are listed as coming soon."
+      },
+      "vote": {
+        "title": "You vote",
+        "text": "Log in and upvote the products you like. You get one vote per product, and you can take it back at any time."
+      },
+      "reorder": {
+        "title": "The list reorders",
+        "text": "Votes decide the order: the most voted products come first, and the list updates as soon as you vote."
+      }
+    },
+    "portfolio": {
+      "title": "A portfolio project",
+      "text": "P.H CLONE is a full-stack portfolio project: a Next.js front end talking to an Express API, with the business rules kept apart from the frameworks.",
+      "frontend": "Front end",
+      "backend": "Back end",
+      "shared": "Auth and architecture"
+    },
+    "cta": {
+      "title": "Ready to pick your favorites?",
+      "text": "Create an account to vote for the products you like, or just browse what the community is upvoting.",
+      "signUp": "Sign up",
+      "viewProducts": "View products"
+    }
   }
 }
