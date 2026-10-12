@@ -20,7 +20,14 @@
     "tagline": "Portfolio project · 2026"
   },
   "home": {
-    "title": "The Next Big App"
+    "title": "The Next Big App",
+    "trending": "Trending topics",
+    "allTopics": "All",
+    "products": "Products",
+    "empty": "No products here yet.",
+    "reviewed": "Products we reviewed",
+    "comingSoon": "Coming soon",
+    "rating": "Rated {rating}/5"
   },
   "errors": {
     "INTERNAL_ERROR": "Something went wrong.",
@@ -39,7 +46,12 @@
       "codeExpired": "That code has expired. Send a new one.",
       "tooManyRequests": "Too many attempts. Try again in a moment.",
       "unknown": "Something went wrong. Try again."
-    }
+    },
+    "UNAUTHENTICATED": "Log in to continue.",
+    "SESSION_EXPIRED": "Your session expired. Log in again.",
+    "PRODUCT_NOT_FOUND": "Product not found.",
+    "PRODUCT_NOT_VOTABLE": "This product can't be voted on yet.",
+    "RATE_LIMITED": "Too many requests. Try again in a moment."
   },
   "auth": {
     "email": "Email",
@@ -70,5 +82,10 @@
       "verifying": "Verifying…",
       "resend": "Send a new code"
     }
+  },
+  "vote": {
+    "add": "Upvote ({count})",
+    "remove": "Remove upvote ({count})",
+    "signInToVote": "Log in to upvote ({count})"
   }
 }
