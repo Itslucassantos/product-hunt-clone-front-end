@@ -3,12 +3,21 @@ import { FieldError } from "./FieldError";
 
 type FormFieldProps = Omit<InputHTMLAttributes<HTMLInputElement>, "id"> & {
   label: string;
+  fieldId?: string;
   hint?: string;
   error?: string | null;
 };
 
-export function FormField({ label, hint, error, className = "", ...props }: FormFieldProps) {
-  const id = useId();
+export function FormField({
+  label,
+  fieldId,
+  hint,
+  error,
+  className = "",
+  ...props
+}: FormFieldProps) {
+  const generatedId = useId();
+  const id = fieldId ?? generatedId;
   const hintId = `${id}-hint`;
   const errorId = `${id}-error`;
   const describedBy = [hint && hintId, error && errorId].filter(Boolean).join(" ") || undefined;

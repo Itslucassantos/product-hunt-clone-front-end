@@ -1,9 +1,7 @@
 export type AuthField = "email" | "password" | "code";
 
-/** `messageKey` is relative to the `errors` namespace in messages/*.json. */
 export type MappedAuthError = { field: AuthField | null; messageKey: string };
 
-// Clerk's own texts are never shown: each error code maps to a key in messages/*.json.
 const KNOWN_ERRORS: Record<string, MappedAuthError> = {
   form_identifier_not_found: { field: null, messageKey: "auth.invalidCredentials" },
   form_password_incorrect: { field: null, messageKey: "auth.invalidCredentials" },
@@ -26,7 +24,6 @@ const UNKNOWN_ERROR: MappedAuthError = { field: null, messageKey: "auth.unknown"
 type ClerkErrorLike = { code?: string; errors?: { code?: string }[] };
 
 export function mapClerkError(error: ClerkErrorLike | null | undefined): MappedAuthError {
-  // API errors may carry the field-level codes in a nested list.
   const codes = [error?.code, ...(error?.errors?.map((e) => e.code) ?? [])];
   const known = codes.find((code) => code && KNOWN_ERRORS[code]);
   const mapped = known ? KNOWN_ERRORS[known] : undefined;

@@ -47,7 +47,6 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          # Placeholder keys: the build only needs them to be well-formed, not valid.
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_Y2xlcmsuZXhhbXBsZS5jb20k
           CLERK_SECRET_KEY: sk_test_placeholder
           NEXT_PUBLIC_API_BASE_URL: http://localhost:3333

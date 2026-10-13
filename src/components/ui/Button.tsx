@@ -10,7 +10,6 @@ const VARIANTS: Record<Variant, string> = {
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: Variant;
-  /** Disables the button and shows a spinner while a request is in flight. */
   loading?: boolean;
 };
 

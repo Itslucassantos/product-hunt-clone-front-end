@@ -1,3 +1,4 @@
+import { Link } from "@/i18n/navigation";
 import type { ProductListItem } from "@/types/api";
 import { ProductImage } from "./ProductImage";
 import { VoteButton } from "./VoteButton";
@@ -13,14 +14,12 @@ export function ProductCard({ product, votes = "button" }: ProductCardProps) {
       <ProductImage id={product.id} src={product.imageUrl} title={product.title} size={64} />
 
       <div className="flex min-w-0 flex-1 flex-col gap-1">
-        <a
-          href={product.url}
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          href={`/products/${product.id}`}
           className="truncate font-display text-lg font-extrabold hover:underline"
         >
           {product.title}
-        </a>
+        </Link>
         <p className="line-clamp-2 text-sm text-ink-soft">{product.description}</p>
         <ul className="mt-1 flex flex-wrap gap-1.5">
           {product.topics.map((topic) => (

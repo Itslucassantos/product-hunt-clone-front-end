@@ -5,11 +5,11 @@ import { useLocale } from "next-intl";
 import { listTopics } from "@/lib/api/endpoints";
 import type { Locale } from "@/types/api";
 
-export function useTopics() {
+export function useTopics({ fresh = false } = {}) {
   const locale = useLocale() as Locale;
 
   return useQuery({
     queryKey: ["topics", locale],
-    queryFn: () => listTopics(locale),
+    queryFn: () => listTopics(locale, { fresh }),
   });
 }

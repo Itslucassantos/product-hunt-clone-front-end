@@ -1,7 +1,9 @@
 {
   "common": {
     "appName": "P.H CLONE",
-    "tryAgain": "Try again"
+    "tryAgain": "Try again",
+    "close": "Close",
+    "requestId": "Request ID: {id}"
   },
   "nav": {
     "products": "Products",
@@ -9,7 +11,8 @@
     "about": "About",
     "logIn": "Log in",
     "signUp": "Sign up",
-    "logOut": "Log out"
+    "logOut": "Log out",
+    "admin": "Admin"
   },
   "header": {
     "homeLabel": "P.H CLONE, home page",
@@ -30,7 +33,7 @@
     "rating": "Rated {rating}/5"
   },
   "errors": {
-    "INTERNAL_ERROR": "Something went wrong.",
+    "INTERNAL_ERROR": "The server failed while processing this request. Try again; if it keeps happening, share the request ID below.",
     "NETWORK_ERROR": "Could not reach the server. Check your connection.",
     "auth": {
       "invalidCredentials": "Incorrect email or password.",
@@ -51,7 +54,32 @@
     "SESSION_EXPIRED": "Your session expired. Log in again.",
     "PRODUCT_NOT_FOUND": "Product not found.",
     "PRODUCT_NOT_VOTABLE": "This product can't be voted on yet.",
-    "RATE_LIMITED": "Too many requests. Try again in a moment."
+    "RATE_LIMITED": "Too many requests. Try again in a moment.",
+    "FORBIDDEN": "You don't have permission to do this.",
+    "VALIDATION_ERROR": "Some fields are invalid.",
+    "MALFORMED_REQUEST": "The request could not be understood.",
+    "INVALID_TOPIC_ORDER": "The topic order could not be saved.",
+    "TOPIC_NOT_FOUND": "Topic not found.",
+    "REVIEW_NOT_FOUND": "Review not found.",
+    "ROUTE_NOT_FOUND": "Page not found.",
+    "TOPIC_ALREADY_EXISTS": "A topic with this name already exists.",
+    "TOPIC_IN_USE": "This topic is still in use.",
+    "IMAGE_TOO_LARGE": "The image is too large (up to 5 MB).",
+    "UNSUPPORTED_IMAGE_TYPE": "Use a PNG or JPG image.",
+    "UPSTREAM_ERROR": "A service we depend on failed. Try again.",
+    "SERVICE_UNAVAILABLE": "The service is unavailable. Try again in a moment.",
+    "fields": {
+      "REQUIRED": "This field is required.",
+      "INVALID_URL": "Enter a valid URL starting with https://.",
+      "TOO_LONG": "This is too long.",
+      "TOO_SHORT": "This is too short.",
+      "OUT_OF_RANGE": "Choose a rating from 1 to 5.",
+      "ALREADY_EXISTS": "This already exists.",
+      "MISSING_TRANSLATION": "Enter the name in both languages.",
+      "INVALID_VALUE": "This value is not valid."
+    },
+    "PRODUCT_ALREADY_EXISTS": "A product with this name already exists. Choose a different name.",
+    "USER_NOT_FOUND": "Your user was not found in the backend. Log out and log in again."
   },
   "auth": {
     "email": "Email",
@@ -126,6 +154,146 @@
       "text": "Create an account to vote for the products you like, or just browse what the community is upvoting.",
       "signUp": "Sign up",
       "viewProducts": "View products"
+    }
+  },
+  "product": {
+    "breadcrumb": "Breadcrumb",
+    "visitSite": "Visit site",
+    "about": "About the product",
+    "moreIn": "More in {topics}",
+    "details": "Details",
+    "votes": "Votes",
+    "publishedOn": "Published on",
+    "website": "Website",
+    "topics": "Topics",
+    "reviewedByUs": "Reviewed by us",
+    "comingSoon": "Coming soon",
+    "comingSoonNote": "Voting opens when this product is published.",
+    "noDescription": "No description yet.",
+    "notFoundTitle": "Product not found",
+    "notFoundText": "This product doesn't exist or was removed.",
+    "backToProducts": "Back to products"
+  },
+  "admin": {
+    "checking": "Checking access…",
+    "badge": "Admin",
+    "navLabel": "Admin",
+    "tabs": {
+      "products": "Products",
+      "topics": "Topics",
+      "viewSite": "View site"
+    },
+    "products": {
+      "title": "Products",
+      "new": "New product",
+      "filters": "Filter products",
+      "filter": {
+        "all": "All",
+        "published": "Published",
+        "comingSoon": "Coming soon",
+        "reviewed": "Reviewed"
+      },
+      "loading": "Loading products…",
+      "emptyTitle": "No products here",
+      "emptyText": "Nothing matches this filter yet.",
+      "topics": "Topics",
+      "status": "Status",
+      "review": "Review",
+      "noReview": "Not reviewed",
+      "votes": "Votes",
+      "edit": "Edit",
+      "delete": "Delete",
+      "editLabel": "Edit {name}",
+      "deleteLabel": "Delete {name}",
+      "cancel": "Cancel",
+      "deleted": "“{name}” was deleted.",
+      "deleteTitle": "Delete “{name}”?",
+      "deleteBody": "Its {votes, plural, one {# vote} other {# votes}} will be deleted too.",
+      "deleteBodyReview": "Its {votes, plural, one {# vote} other {# votes}} and its review will be deleted too."
+    },
+    "form": {
+      "back": "Back to products",
+      "newTitle": "New product",
+      "editTitle": "Edit product",
+      "loading": "Loading product…",
+      "notFound": "Product not found",
+      "fixFields": "{count, plural, one {Fix # field to save this product} other {Fix # fields to save this product}}",
+      "details": "Details",
+      "image": "Image",
+      "chooseImage": "Choose image",
+      "changeImage": "Change image",
+      "removeImage": "Remove image",
+      "imageHint": "PNG or JPG, up to 5 MB. Without an image, the product shows its initial.",
+      "uploading": "Uploading image",
+      "name": "Name",
+      "shortDescription": "Short description",
+      "shortDescriptionHint": "Shown in the product lists.",
+      "fullDescription": "Full description",
+      "fullDescriptionHint": "Shown on the product page.",
+      "site": "Website",
+      "siteHint": "Must start with https://",
+      "topics": "Topics",
+      "loadingTopics": "Loading topics…",
+      "retry": "Try again",
+      "publishing": "Publishing",
+      "published": "Published",
+      "comingSoon": "Coming soon",
+      "publishingHint": "“Coming soon” lists the product in the Coming soon column and turns voting off.",
+      "review": "Review",
+      "reviewedByUs": "Reviewed by us",
+      "rating": "Rating",
+      "ratingOption": "Rating {rating} of 5",
+      "reviewSummary": "Review summary",
+      "save": "Save changes",
+      "saving": "Saving…",
+      "saved": "Product saved.",
+      "cancel": "Cancel",
+      "errors": {
+        "imageType": "The image must be a PNG or JPG.",
+        "imageSize": "The image can be up to 5 MB.",
+        "imageUpstream": "The image could not be uploaded. Try again.",
+        "chooseTopic": "Choose at least one topic.",
+        "topicRemoved": "A selected topic was removed. Review your choice."
+      },
+      "steps": {
+        "upload": "The image could not be uploaded. Nothing was saved.",
+        "product": "The product could not be saved.",
+        "review": "The product was saved, but its review could not be saved."
+      }
+    },
+    "topics": {
+      "title": "Topics",
+      "new": "New topic",
+      "newTitle": "New topic",
+      "editTitle": "Edit topic",
+      "english": "English",
+      "portuguese": "Portuguese",
+      "name": "Name",
+      "description": "Description",
+      "slug": "Slug",
+      "slugHint": "Generated from the English name. It never changes after the topic is created.",
+      "save": "Save topic",
+      "saving": "Saving…",
+      "saved": "Topic saved.",
+      "cancel": "Cancel",
+      "loading": "Loading topics…",
+      "emptyTitle": "No topics yet",
+      "emptyText": "Create the first topic so products can be organized.",
+      "products": "Products",
+      "moveUp": "Move {name} up",
+      "moveDown": "Move {name} down",
+      "edit": "Edit",
+      "delete": "Delete",
+      "editLabel": "Edit {name}",
+      "deleteLabel": "Delete {name}",
+      "deleted": "“{name}” was deleted.",
+      "deleteTitle": "Delete “{name}”?",
+      "deleteBody": "This topic will be removed from every product that uses it.",
+      "blockedTitle": "“{name}” can't be deleted yet",
+      "blockedBody": "{count, plural, one {# product would be left} other {# products would be left}} without a topic. Every product needs at least one. Give them another topic first.",
+      "gotIt": "Got it",
+      "viewProducts": "View products",
+      "andMore": "and {count} more"
     }
   }
 }
