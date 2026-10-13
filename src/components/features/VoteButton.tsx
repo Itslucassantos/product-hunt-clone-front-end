@@ -7,10 +7,19 @@ import { useToggleVote } from "@/hooks/useToggleVote";
 import { Link } from "@/i18n/navigation";
 import { errorMessageKey } from "@/lib/api/error-message-key";
 
-const BOX =
-  "flex min-h-14 min-w-14 shrink-0 flex-col items-center justify-center rounded-xl border px-3 py-2 text-sm font-semibold";
+const BOX = {
+  md: "flex min-h-14 min-w-14 shrink-0 flex-col items-center justify-center rounded-xl border px-3 py-2 text-sm font-semibold",
+  lg: "flex min-h-16 min-w-20 shrink-0 flex-col items-center justify-center rounded-2xl border px-5 py-2 text-lg font-bold",
+};
 
-export function VoteButton({ productId, upvotes }: { productId: string; upvotes: number }) {
+type VoteButtonProps = {
+  productId: string;
+  upvotes: number;
+  size?: keyof typeof BOX;
+  redirectTo?: string;
+};
+
+export function VoteButton({ productId, upvotes, size = "md", redirectTo = "/" }: VoteButtonProps) {
   const t = useTranslations();
   const { isSignedIn } = useAuth();
   const { data: myVotes } = useMyVotes();
@@ -29,9 +38,9 @@ export function VoteButton({ productId, upvotes }: { productId: string; upvotes:
   if (!isSignedIn) {
     return (
       <Link
-        href={{ pathname: "/sign-in", query: { redirect_url: "/" } }}
+        href={{ pathname: "/sign-in", query: { redirect_url: redirectTo } }}
         aria-label={t("vote.signInToVote", { count: upvotes })}
-        className={`${BOX} border-border-strong`}
+        className={`${BOX[size]} border-border-strong`}
       >
         {content}
       </Link>
@@ -46,7 +55,7 @@ export function VoteButton({ productId, upvotes }: { productId: string; upvotes:
         disabled={vote.isPending}
         aria-pressed={voted}
         aria-label={t(voted ? "vote.remove" : "vote.add", { count: upvotes })}
-        className={`${BOX} disabled:opacity-60 ${
+        className={`${BOX[size]} disabled:opacity-60 ${
           voted ? "border-primary bg-primary text-white" : "border-border-strong"
         }`}
       >

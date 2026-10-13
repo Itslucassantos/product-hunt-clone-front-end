@@ -5,7 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 import { getMe } from "@/lib/api/endpoints";
 import { useAuthToken } from "./useAuthToken";
 
-/** Backend user (id and role). Only runs when signed in; role comes from the DB, never the token. */
 export function useMe() {
   const { isSignedIn } = useAuth();
   const getAuthToken = useAuthToken();

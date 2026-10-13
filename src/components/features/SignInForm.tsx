@@ -69,7 +69,6 @@ export function SignInForm() {
       if (signIn.status === "complete") return await finish();
 
       if (signIn.status === "needs_client_trust" || signIn.status === "needs_second_factor") {
-        // New device: Clerk asks for a code sent to the email before the session is created.
         const { error: sendError } = await signIn.mfa.sendEmailCode();
         if (sendError) return showClerkError(sendError);
         return setAwaitingCode(true);

@@ -71,7 +71,6 @@ export function SignUpForm() {
 
       if (signUp.status === "complete") return await finish();
 
-      // Clerk asks for the email to be verified with a code before the account is created.
       const { error: sendError } = await signUp.verifications.sendEmailCode();
       if (sendError) return showClerkError(sendError);
       setAwaitingCode(true);
@@ -156,7 +155,7 @@ export function SignUpForm() {
         onChange={(event) => setPassword(event.target.value)}
         error={errors.password}
       />
-      {/* Mount point for Clerk bot protection (enabled on this instance). */}
+
       <div id="clerk-captcha" />
       <Button type="submit" loading={busy} className="w-full">
         {busy ? t("signUp.submitting") : t("signUp.submit")}

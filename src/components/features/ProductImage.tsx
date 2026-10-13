@@ -12,18 +12,20 @@ type ProductImageProps = {
   id: string;
   src: string | null;
   title: string;
-  size: 40 | 64;
+  size: 40 | 64 | 96;
   dashed?: boolean;
 };
 
 export function ProductImage({ id, src, title, size, dashed = false }: ProductImageProps) {
-  const box = size === 40 ? "h-10 w-10" : "h-16 w-16";
+  const box = { 40: "h-10 w-10", 64: "h-16 w-16", 96: "h-24 w-24" }[size];
+  const radius = size === 96 ? "rounded-2xl" : "rounded-xl";
+  const letter = { 40: "text-lg", 64: "text-2xl", 96: "text-4xl" }[size];
   const outline = dashed ? "border-2 border-dashed border-[color:var(--dashed)]" : "";
 
   if (!src) {
     return (
       <span
-        className={`${box} ${outline} flex shrink-0 items-center justify-center rounded-xl font-display font-extrabold uppercase ${size === 40 ? "text-lg" : "text-2xl"} ${dashed ? "text-ink-soft" : "text-white"}`}
+        className={`${box} ${outline} flex shrink-0 items-center justify-center ${radius} font-display font-extrabold uppercase ${letter} ${dashed ? "text-ink-soft" : "text-white"}`}
         style={dashed ? undefined : { backgroundColor: colorFor(id) }}
         aria-hidden="true"
       >
@@ -39,7 +41,7 @@ export function ProductImage({ id, src, title, size, dashed = false }: ProductIm
       width={size}
       height={size}
       unoptimized
-      className={`${box} ${outline} shrink-0 rounded-xl object-cover`}
+      className={`${box} ${outline} shrink-0 ${radius} object-cover`}
     />
   );
 }

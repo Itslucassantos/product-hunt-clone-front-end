@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Alert } from "@/components/ui/Alert";
 import { useProducts } from "@/hooks/useProducts";
+import { Link } from "@/i18n/navigation";
 import { errorMessageKey } from "@/lib/api/error-message-key";
 import { ProductImage } from "./ProductImage";
 import { StarRating } from "./StarRating";
@@ -65,14 +66,12 @@ export function SideProductList({
                 dashed={dashed}
               />
               <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-                <a
-                  href={product.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href={`/products/${product.id}`}
                   className="font-semibold leading-tight hover:underline"
                 >
                   {product.title}
-                </a>
+                </Link>
                 <p className="text-sm text-muted">{product.description}</p>
                 {showRating && product.review && (
                   <div className="mt-0.5 flex items-center gap-2">

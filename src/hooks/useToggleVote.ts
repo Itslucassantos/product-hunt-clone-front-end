@@ -12,8 +12,14 @@ export function useToggleVote(productId: string) {
   return useMutation({
     mutationFn: async () => toggleVote(productId, await getAuthToken()),
     onSuccess: ({ upvotes, voted }: VoteResult) => {
-      queryClient.setQueriesData<ProductListItem[]>({ queryKey: ["products"] }, (list) =>
-        Array.isArray(list) ? list.map((p) => (p.id === productId ? { ...p, upvotes } : p)) : list,
+      queryClient.setQueriesData<ProductListItem[] | ProductListItem>(
+        { queryKey: ["products"] },
+        (data) => {
+          if (Array.isArray(data)) {
+            return data.map((p) => (p.id === productId ? { ...p, upvotes } : p));
+          }
+          return data?.id === productId ? { ...data, upvotes } : data;
+        },
       );
       queryClient.setQueryData<MyVotes>(["my-votes"], (data) => {
         const ids = new Set(data?.productIds ?? []);

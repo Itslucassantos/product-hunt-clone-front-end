@@ -7,13 +7,14 @@ type RequestOptions = {
   method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
   query?: Record<string, string | undefined>;
   body?: unknown;
-  /** Clerk token. Public routes are called without it. */
   token?: string | null;
   signal?: AbortSignal;
+
+  fresh?: boolean;
 };
 
 export async function apiRequest<T>(path: string, options: RequestOptions = {}): Promise<T> {
-  const { method = "GET", query, body, token, signal } = options;
+  const { method = "GET", query, body, token, signal, fresh } = options;
 
   const url = new URL(`/api${path}`, API_BASE_URL);
   for (const [key, value] of Object.entries(query ?? {})) {
@@ -31,6 +32,7 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
       headers,
       body: body === undefined ? undefined : JSON.stringify(body),
       signal,
+      cache: fresh ? "no-cache" : undefined,
     });
   } catch (cause) {
     if (cause instanceof DOMException && cause.name === "AbortError") throw cause;

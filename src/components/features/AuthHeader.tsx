@@ -2,7 +2,6 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Logo } from "./Logo";
 import { ThemeToggle } from "./ThemeToggle";
 
-// Minimal header for the log in and sign up screens: logo, language and theme only.
 export function AuthHeader() {
   return (
     <header className="border-b border-border bg-surface">

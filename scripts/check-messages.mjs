@@ -1,4 +1,3 @@
-// Fails when messages/en.json and messages/pt-BR.json do not have the same keys.
 import { readFileSync } from "node:fs";
 
 const flatten = (obj, prefix = "") =>
