@@ -3,7 +3,12 @@
     "appName": "P.H CLONE",
     "tryAgain": "Try again",
     "close": "Close",
-    "requestId": "Request ID: {id}"
+    "requestId": "Request ID: {id}",
+    "loadingProducts": "Loading products…",
+    "loadingTopics": "Loading topics…",
+    "retryIn": "Try again in {seconds}s",
+    "backToProducts": "Back to products",
+    "unsavedChanges": "You have unsaved changes. Leave without saving?"
   },
   "nav": {
     "products": "Products",
@@ -30,7 +35,10 @@
     "empty": "No products here yet.",
     "reviewed": "Products we reviewed",
     "comingSoon": "Coming soon",
-    "rating": "Rated {rating}/5"
+    "rating": "Rated {rating}/5",
+    "emptyTitle": "No products found",
+    "emptyTopic": "There are no products in this topic yet.",
+    "showAll": "Show all products"
   },
   "errors": {
     "INTERNAL_ERROR": "The server failed while processing this request. Try again; if it keeps happening, share the request ID below.",
@@ -79,7 +87,8 @@
       "INVALID_VALUE": "This value is not valid."
     },
     "PRODUCT_ALREADY_EXISTS": "A product with this name already exists. Choose a different name.",
-    "USER_NOT_FOUND": "Your user was not found in the backend. Log out and log in again."
+    "USER_NOT_FOUND": "Your user was not found in the backend. Log out and log in again.",
+    "RATE_LIMITED_RETRY": "Too many requests. Try again in {seconds, plural, one {# second} other {# seconds}}."
   },
   "auth": {
     "email": "Email",
@@ -122,7 +131,8 @@
     "productCount": "{count, plural, one {# product} other {# products}}",
     "mostVoted": "Most voted in {topic}",
     "noProducts": "No products in this category yet.",
-    "empty": "No categories yet."
+    "empty": "No categories yet.",
+    "emptyTitle": "No products in this category"
   },
   "about": {
     "title": "About P.H CLONE",
@@ -295,5 +305,18 @@
       "viewProducts": "View products",
       "andMore": "and {count} more"
     }
+  },
+  "errorScreens": {
+    "generic": "Something went wrong",
+    "offline": "You're offline",
+    "unauthenticated": "Log in to continue",
+    "sessionExpired": "Your session expired",
+    "forbidden": "You don't have permission",
+    "notFound": "Page not found",
+    "rateLimited": "Too many requests",
+    "serverError": "Server error",
+    "unavailable": "Service unavailable",
+    "upstream": "A service failed",
+    "notFoundText": "The page you're looking for doesn't exist or was moved."
   }
 }

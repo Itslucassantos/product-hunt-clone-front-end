@@ -2,6 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { useState, type FormEvent } from "react";
+import { useRateLimit } from "@/components/RateLimit";
+import { useUnsavedChangesWarning } from "@/hooks/useUnsavedChangesWarning";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import { FormField } from "@/components/ui/FormField";
@@ -39,11 +41,16 @@ type TopicFormProps = {
 export function TopicForm({ initial, slug, onSubmit, onCancel }: TopicFormProps) {
   const t = useTranslations("admin.topics");
   const tErrors = useTranslations("errors");
+  const tCommon = useTranslations("common");
   const tFields = useTranslations("errors.fields");
   const [values, setValues] = useState(initial);
+  const [initialValues] = useState(() => JSON.stringify(initial));
+  const dirty = JSON.stringify(values) !== initialValues;
+  useUnsavedChangesWarning(dirty, tCommon("unsavedChanges"));
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const { limited, secondsLeft } = useRateLimit();
 
   const set = (locale: Locale, key: "name" | "description", value: string) => {
     setValues((current) => ({ ...current, [locale]: { ...current[locale], [key]: value } }));
@@ -80,7 +87,11 @@ export function TopicForm({ initial, slug, onSubmit, onCancel }: TopicFormProps)
           next[`${match[1]}.${match[2]}`] = tFields.has(code) ? tFields(code) : tFields("REQUIRED");
       }
       if (error instanceof ApiRequestError && error.code === "TOPIC_ALREADY_EXISTS") {
-        for (const locale of LOCALES) next[`${locale}.name`] = tFields("ALREADY_EXISTS");
+        const field = (error.details as { field?: string } | undefined)?.field;
+        const match = field && /^translations\.(en|pt-BR)\.name$/.exec(field);
+        for (const locale of match ? [match[1] as Locale] : LOCALES) {
+          next[`${locale}.name`] = tFields("ALREADY_EXISTS");
+        }
       }
       setErrors(next);
       if (Object.keys(next).length === 0) setFormError(tErrors(errorMessageKey(error)));
@@ -131,10 +142,21 @@ export function TopicForm({ initial, slug, onSubmit, onCancel }: TopicFormProps)
       />
 
       <div className="flex flex-wrap gap-3">
-        <Button type="submit" loading={saving}>
-          {saving ? t("saving") : t("save")}
+        <Button type="submit" loading={saving} disabled={limited}>
+          {saving
+            ? t("saving")
+            : limited
+              ? tCommon("retryIn", { seconds: secondsLeft })
+              : t("save")}
         </Button>
-        <Button type="button" variant="secondary" onClick={onCancel} disabled={saving}>
+        <Button
+          type="button"
+          variant="secondary"
+          onClick={() => {
+            if (!dirty || window.confirm(tCommon("unsavedChanges"))) onCancel();
+          }}
+          disabled={saving}
+        >
           {t("cancel")}
         </Button>
       </div>

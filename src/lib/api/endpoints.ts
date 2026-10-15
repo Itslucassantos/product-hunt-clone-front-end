@@ -25,8 +25,8 @@ export const listProducts = ({ locale, topic, status, reviewed }: ListProductsPa
     query: { locale, topic, status, reviewed: reviewed ? "true" : undefined },
   });
 
-export const getProduct = (id: string, locale: Locale) =>
-  apiRequest<ProductDetail>(`/products/${id}`, { query: { locale } });
+export const getProduct = (id: string, locale: Locale, { fresh = false } = {}) =>
+  apiRequest<ProductDetail>(`/products/${id}`, { query: { locale }, fresh });
 
 export const listTopics = (locale: Locale, { fresh = false } = {}) =>
   apiRequest<Topic[]>("/topics", { query: { locale }, fresh });

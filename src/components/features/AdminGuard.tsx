@@ -23,10 +23,23 @@ export function AdminGuard({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (isLoaded && !isSignedIn) {
       router.replace({ pathname: "/sign-in", query: { redirect_url: pathname } });
-    } else if (forbidden) {
-      router.replace("/");
     }
-  }, [isLoaded, isSignedIn, forbidden, router, pathname]);
+  }, [isLoaded, isSignedIn, router, pathname]);
+
+  if (forbidden) {
+    return (
+      <ErrorState
+        page
+        error={
+          new ApiRequestError(
+            "FORBIDDEN",
+            403,
+            me.error instanceof ApiRequestError ? me.error.requestId : null,
+          )
+        }
+      />
+    );
+  }
 
   if (me.isError && !forbidden) {
     return <ErrorState error={me.error} onRetry={() => me.refetch()} />;

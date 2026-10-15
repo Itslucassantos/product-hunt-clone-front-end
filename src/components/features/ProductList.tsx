@@ -2,9 +2,11 @@
 
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { Alert } from "@/components/ui/Alert";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { ErrorState } from "@/components/ui/ErrorState";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { useProducts } from "@/hooks/useProducts";
-import { errorMessageKey } from "@/lib/api/error-message-key";
+import { Link } from "@/i18n/navigation";
 import { ProductCard } from "./ProductCard";
 
 export function ProductList() {
@@ -18,28 +20,23 @@ export function ProductList() {
         {t("home.products")}
       </h2>
 
-      {isPending && (
-        <ul className="flex flex-col gap-3" aria-hidden="true">
-          {[0, 1, 2].map((i) => (
-            <li key={i} className="h-28 animate-pulse rounded-2xl bg-tag" />
-          ))}
-        </ul>
-      )}
+      {isPending && <Skeleton label={t("common.loadingProducts")} />}
 
-      {isError && (
-        <div className="flex flex-col items-start gap-2">
-          <Alert>{t(`errors.${errorMessageKey(error)}`)}</Alert>
-          <button
-            type="button"
-            onClick={() => refetch()}
-            className="text-sm font-semibold underline"
-          >
-            {t("common.tryAgain")}
-          </button>
-        </div>
-      )}
+      {isError && <ErrorState error={error} onRetry={() => refetch()} />}
 
-      {products && products.length === 0 && <p className="text-muted">{t("home.empty")}</p>}
+      {products && products.length === 0 && (
+        <EmptyState
+          title={t("home.emptyTitle")}
+          text={topic ? t("home.emptyTopic") : t("home.empty")}
+          action={
+            topic && (
+              <Link href="/" className="mt-2 font-semibold underline">
+                {t("home.showAll")}
+              </Link>
+            )
+          }
+        />
+      )}
 
       {products && products.length > 0 && (
         <ul className="flex flex-col gap-3">

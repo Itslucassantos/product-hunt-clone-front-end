@@ -1,3 +1,4 @@
+import { titleFrom } from "@/lib/metadata";
 import { setRequestLocale } from "next-intl/server";
 import { useTranslations } from "next-intl";
 import { use } from "react";
@@ -80,3 +81,5 @@ export default function AboutPage({ params }: { params: Promise<{ locale: string
     </div>
   );
 }
+
+export const generateMetadata = titleFrom("about", "title", { absolute: true });

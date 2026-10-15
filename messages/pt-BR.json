@@ -3,7 +3,12 @@
     "appName": "P.H CLONE",
     "tryAgain": "Tentar de novo",
     "close": "Fechar",
-    "requestId": "ID da requisição: {id}"
+    "requestId": "ID da requisição: {id}",
+    "loadingProducts": "Carregando produtos…",
+    "loadingTopics": "Carregando tópicos…",
+    "retryIn": "Tentar de novo em {seconds}s",
+    "backToProducts": "Voltar aos produtos",
+    "unsavedChanges": "Você tem alterações não salvas. Sair sem salvar?"
   },
   "nav": {
     "products": "Produtos",
@@ -30,7 +35,10 @@
     "empty": "Ainda não há produtos aqui.",
     "reviewed": "Produtos revisados por nós",
     "comingSoon": "Em breve",
-    "rating": "Nota {rating}/5"
+    "rating": "Nota {rating}/5",
+    "emptyTitle": "Nenhum produto encontrado",
+    "emptyTopic": "Ainda não há produtos neste tópico.",
+    "showAll": "Ver todos os produtos"
   },
   "errors": {
     "INTERNAL_ERROR": "O servidor falhou ao processar esta requisição. Tente de novo; se continuar, informe o ID da requisição abaixo.",
@@ -79,7 +87,8 @@
       "INVALID_VALUE": "Este valor não é válido."
     },
     "PRODUCT_ALREADY_EXISTS": "Já existe um produto com esse nome. Escolha outro nome.",
-    "USER_NOT_FOUND": "Seu usuário não foi encontrado no backend. Saia e entre de novo."
+    "USER_NOT_FOUND": "Seu usuário não foi encontrado no backend. Saia e entre de novo.",
+    "RATE_LIMITED_RETRY": "Muitas requisições. Tente de novo em {seconds, plural, one {# segundo} other {# segundos}}."
   },
   "auth": {
     "email": "E-mail",
@@ -122,7 +131,8 @@
     "productCount": "{count, plural, one {# produto} other {# produtos}}",
     "mostVoted": "Mais votados em {topic}",
     "noProducts": "Ainda não há produtos nesta categoria.",
-    "empty": "Ainda não há categorias."
+    "empty": "Ainda não há categorias.",
+    "emptyTitle": "Nenhum produto nesta categoria"
   },
   "about": {
     "title": "Sobre o P.H CLONE",
@@ -295,5 +305,18 @@
       "viewProducts": "Ver produtos",
       "andMore": "e mais {count}"
     }
+  },
+  "errorScreens": {
+    "generic": "Algo deu errado",
+    "offline": "Você está sem conexão",
+    "unauthenticated": "Entre para continuar",
+    "sessionExpired": "Sua sessão expirou",
+    "forbidden": "Você não tem permissão",
+    "notFound": "Página não encontrada",
+    "rateLimited": "Muitas requisições",
+    "serverError": "Erro no servidor",
+    "unavailable": "Serviço indisponível",
+    "upstream": "Um serviço falhou",
+    "notFoundText": "A página que você procura não existe ou foi movida."
   }
 }

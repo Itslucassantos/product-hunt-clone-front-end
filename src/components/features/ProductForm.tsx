@@ -3,6 +3,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useRateLimit } from "@/components/RateLimit";
 import { Button } from "@/components/ui/Button";
 import { FieldError } from "@/components/ui/FieldError";
 import { FormField } from "@/components/ui/FormField";
@@ -13,6 +14,7 @@ import { Switch } from "@/components/ui/Switch";
 import { useToast } from "@/components/ui/Toast";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { useTopics } from "@/hooks/useTopics";
+import { useUnsavedChangesWarning } from "@/hooks/useUnsavedChangesWarning";
 import { Link, useRouter } from "@/i18n/navigation";
 import { createProduct, removeReview, saveReview, updateProduct } from "@/lib/api/endpoints";
 import { errorMessageKey } from "@/lib/api/error-message-key";
@@ -65,6 +67,22 @@ export function ProductForm({ product }: { product?: ProductDetail }) {
   const [rating, setRating] = useState(product?.review?.rating ?? 0);
   const [summary, setSummary] = useState(product?.review?.summary ?? "");
 
+  const snapshot = JSON.stringify({
+    title,
+    description,
+    longDescription,
+    url,
+    imageUrl,
+    hasNewImage: imageFile !== null,
+    topicIds: [...topicIds].sort(),
+    status,
+    reviewed,
+    rating,
+    summary,
+  });
+  const [initialSnapshot] = useState(snapshot);
+  useUnsavedChangesWarning(snapshot !== initialSnapshot, tCommon("unsavedChanges"));
+
   const [errors, setErrors] = useState<Errors>({});
   const [formError, setFormError] = useState<{
     title: string;
@@ -72,6 +90,7 @@ export function ProductForm({ product }: { product?: ProductDetail }) {
     technical: string | null;
   } | null>(null);
   const [saving, setSaving] = useState(false);
+  const { limited, secondsLeft } = useRateLimit();
   const [progress, setProgress] = useState<number | null>(null);
   const [attempt, setAttempt] = useState(0);
 
@@ -509,8 +528,17 @@ export function ProductForm({ product }: { product?: ProductDetail }) {
       </div>
 
       <div className="flex items-center gap-3">
-        <Button type="submit" loading={saving} className="min-h-12 flex-1 sm:min-w-40 sm:flex-none">
-          {saving ? t("saving") : t("save")}
+        <Button
+          type="submit"
+          loading={saving}
+          disabled={limited}
+          className="min-h-12 flex-1 sm:min-w-40 sm:flex-none"
+        >
+          {saving
+            ? t("saving")
+            : limited
+              ? tCommon("retryIn", { seconds: secondsLeft })
+              : t("save")}
         </Button>
         <Link
           href="/admin/products"

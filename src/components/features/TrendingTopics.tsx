@@ -2,12 +2,12 @@
 
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { Alert } from "@/components/ui/Alert";
+import { ErrorState } from "@/components/ui/ErrorState";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { useTopics } from "@/hooks/useTopics";
 import { Link } from "@/i18n/navigation";
-import { errorMessageKey } from "@/lib/api/error-message-key";
 
-const CHIP = "inline-flex min-h-9 items-center rounded-full px-4 text-sm font-semibold";
+const CHIP = "inline-flex min-h-11 items-center rounded-full px-4 text-sm font-semibold";
 
 export function TrendingTopics() {
   const t = useTranslations();
@@ -21,25 +21,15 @@ export function TrendingTopics() {
       </h2>
 
       {isPending && (
-        <div className="flex gap-2" aria-hidden="true">
-          {[0, 1, 2, 3, 4].map((i) => (
-            <span key={i} className="h-9 w-24 animate-pulse rounded-full bg-tag" />
-          ))}
-        </div>
+        <Skeleton
+          label={t("common.loadingTopics")}
+          count={5}
+          listClassName="flex gap-2"
+          itemClassName="h-11 w-24 rounded-full"
+        />
       )}
 
-      {isError && (
-        <div className="flex flex-col items-start gap-2">
-          <Alert>{t(`errors.${errorMessageKey(error)}`)}</Alert>
-          <button
-            type="button"
-            onClick={() => refetch()}
-            className="text-sm font-semibold underline"
-          >
-            {t("common.tryAgain")}
-          </button>
-        </div>
-      )}
+      {isError && <ErrorState error={error} onRetry={() => refetch()} />}
 
       {topics && (
         <ul className="flex flex-wrap gap-2">

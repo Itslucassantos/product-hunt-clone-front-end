@@ -21,7 +21,9 @@ const instrument = Instrument_Sans({
   variable: "--font-instrument",
 });
 
-export const metadata: Metadata = { title: "P.H CLONE" };
+export const metadata: Metadata = {
+  title: { default: "P.H CLONE", template: "%s | P.H CLONE" },
+};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

@@ -1,10 +1,10 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Alert } from "@/components/ui/Alert";
+import { ErrorState } from "@/components/ui/ErrorState";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { useProducts } from "@/hooks/useProducts";
 import { Link } from "@/i18n/navigation";
-import { errorMessageKey } from "@/lib/api/error-message-key";
 import { ProductImage } from "./ProductImage";
 import { StarRating } from "./StarRating";
 
@@ -32,25 +32,15 @@ export function SideProductList({
       </h2>
 
       {isPending && (
-        <ul className="flex flex-col gap-4" aria-hidden="true">
-          {[0, 1].map((i) => (
-            <li key={i} className="h-10 animate-pulse rounded-xl bg-tag" />
-          ))}
-        </ul>
+        <Skeleton
+          label={t("common.loadingProducts")}
+          count={2}
+          listClassName="flex flex-col gap-4"
+          itemClassName="h-10 rounded-xl"
+        />
       )}
 
-      {isError && (
-        <div className="flex flex-col items-start gap-2">
-          <Alert>{t(`errors.${errorMessageKey(error)}`)}</Alert>
-          <button
-            type="button"
-            onClick={() => refetch()}
-            className="text-sm font-semibold underline"
-          >
-            {t("common.tryAgain")}
-          </button>
-        </div>
-      )}
+      {isError && <ErrorState error={error} onRetry={() => refetch()} />}
 
       {products && products.length === 0 && <p className="text-sm text-muted">{t("home.empty")}</p>}
 

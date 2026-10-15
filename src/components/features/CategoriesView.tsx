@@ -2,29 +2,18 @@
 
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { Alert } from "@/components/ui/Alert";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { ErrorState } from "@/components/ui/ErrorState";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { useProducts } from "@/hooks/useProducts";
 import { useTopics } from "@/hooks/useTopics";
-import { usePathname, useRouter } from "@/i18n/navigation";
-import { errorMessageKey } from "@/lib/api/error-message-key";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { CategoryCard } from "./CategoryCard";
 import { ProductCard } from "./ProductCard";
 
-function RetryAlert({ error, onRetry }: { error: unknown; onRetry: () => void }) {
-  const t = useTranslations();
-
-  return (
-    <div className="flex flex-col items-start gap-2">
-      <Alert>{t(`errors.${errorMessageKey(error)}`)}</Alert>
-      <button type="button" onClick={onRetry} className="text-sm font-semibold underline">
-        {t("common.tryAgain")}
-      </button>
-    </div>
-  );
-}
-
 export function CategoriesView() {
   const t = useTranslations("categories");
+  const tCommon = useTranslations();
   const router = useRouter();
   const pathname = usePathname();
   const topicParam = useSearchParams().get("topic");
@@ -39,17 +28,15 @@ export function CategoriesView() {
   return (
     <div className="flex flex-col gap-10">
       {topics.isPending && (
-        <div
-          className="grid grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))] gap-4"
-          aria-hidden="true"
-        >
-          {[0, 1, 2].map((i) => (
-            <div key={i} className="h-40 animate-pulse rounded-2xl bg-tag" />
-          ))}
-        </div>
+        <Skeleton
+          label={tCommon("common.loadingTopics")}
+          count={3}
+          listClassName="grid grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))] gap-4"
+          itemClassName="h-40 rounded-2xl"
+        />
       )}
 
-      {topics.isError && <RetryAlert error={topics.error} onRetry={() => topics.refetch()} />}
+      {topics.isError && <ErrorState error={topics.error} onRetry={() => topics.refetch()} />}
 
       {topics.data && topics.data.length === 0 && <p className="text-muted">{t("empty")}</p>}
 
@@ -73,20 +60,22 @@ export function CategoriesView() {
             {t("mostVoted", { topic: selected.name })}
           </h2>
 
-          {products.isPending && (
-            <ul className="flex flex-col gap-3" aria-hidden="true">
-              {[0, 1, 2].map((i) => (
-                <li key={i} className="h-28 animate-pulse rounded-2xl bg-tag" />
-              ))}
-            </ul>
-          )}
+          {products.isPending && <Skeleton label={tCommon("common.loadingProducts")} />}
 
           {products.isError && (
-            <RetryAlert error={products.error} onRetry={() => products.refetch()} />
+            <ErrorState error={products.error} onRetry={() => products.refetch()} />
           )}
 
           {products.data && products.data.length === 0 && (
-            <p className="text-muted">{t("noProducts")}</p>
+            <EmptyState
+              title={t("emptyTitle")}
+              text={t("noProducts")}
+              action={
+                <Link href="/" className="mt-2 font-semibold underline">
+                  {tCommon("home.showAll")}
+                </Link>
+              }
+            />
           )}
 
           {products.data && products.data.length > 0 && (
