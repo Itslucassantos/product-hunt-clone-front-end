@@ -1,3 +1,4 @@
+import { adminTitleFrom } from "@/lib/metadata";
 import { setRequestLocale } from "next-intl/server";
 import { use } from "react";
 import { AdminProductsView } from "@/components/features/AdminProductsView";
@@ -6,3 +7,5 @@ export default function AdminProductsPage({ params }: { params: Promise<{ locale
   setRequestLocale(use(params).locale);
   return <AdminProductsView />;
 }
+
+export const generateMetadata = adminTitleFrom("products.title");

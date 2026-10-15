@@ -2,14 +2,11 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useLocale } from "next-intl";
-import { listTopics } from "@/lib/api/endpoints";
+import { topicsQuery } from "@/lib/api/queries";
 import type { Locale } from "@/types/api";
 
 export function useTopics({ fresh = false } = {}) {
   const locale = useLocale() as Locale;
 
-  return useQuery({
-    queryKey: ["topics", locale],
-    queryFn: () => listTopics(locale, { fresh }),
-  });
+  return useQuery(topicsQuery(locale, { fresh }));
 }

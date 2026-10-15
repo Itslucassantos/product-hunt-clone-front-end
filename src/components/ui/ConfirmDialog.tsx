@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
+import { useRateLimit } from "@/components/RateLimit";
 import { Button } from "./Button";
 
 type ConfirmDialogProps = {
@@ -31,6 +32,7 @@ export function ConfirmDialog({
   extraAction,
 }: ConfirmDialogProps) {
   const ref = useRef<HTMLDialogElement>(null);
+  const { limited } = useRateLimit();
 
   useEffect(() => {
     const dialog = ref.current;
@@ -50,25 +52,35 @@ export function ConfirmDialog({
         event.preventDefault();
         if (!loading) onCancel();
       }}
-      className="w-full max-w-[420px] rounded-[20px] border border-border bg-surface p-6 text-ink backdrop:bg-black/60"
+      onClick={(event) => {
+        if (event.target === event.currentTarget && !loading) onCancel();
+      }}
+      className="w-full max-w-[420px] rounded-[20px] border border-border bg-surface p-0 text-ink backdrop:bg-black/60 open:animate-dialog-in motion-reduce:animate-none"
     >
-      <h2 id="confirm-title" className="font-display text-xl font-extrabold">
-        {title}
-      </h2>
-      <p id="confirm-description" className="mt-2 text-sm text-ink-soft">
-        {description}
-      </p>
-      {children}
-      <div className="mt-6 flex flex-wrap justify-end gap-2">
-        {extraAction}
-        <Button variant="secondary" onClick={onCancel} disabled={loading} autoFocus>
-          {cancelLabel}
-        </Button>
-        {variant === "destructive" && (
-          <Button onClick={onConfirm} loading={loading} className="bg-danger-solid text-white">
-            {confirmLabel}
+      <div className="p-6">
+        <h2 id="confirm-title" className="font-display text-xl font-extrabold">
+          {title}
+        </h2>
+        <p id="confirm-description" className="mt-2 text-sm text-ink-soft">
+          {description}
+        </p>
+        {children}
+        <div className="mt-6 flex flex-wrap justify-end gap-2">
+          {extraAction}
+          <Button variant="secondary" onClick={onCancel} disabled={loading} autoFocus>
+            {cancelLabel}
           </Button>
-        )}
+          {variant === "destructive" && (
+            <Button
+              onClick={onConfirm}
+              loading={loading}
+              disabled={limited}
+              className="bg-danger-solid text-white"
+            >
+              {confirmLabel}
+            </Button>
+          )}
+        </div>
       </div>
     </dialog>
   );

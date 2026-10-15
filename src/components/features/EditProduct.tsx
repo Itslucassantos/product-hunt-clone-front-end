@@ -10,7 +10,7 @@ import { ProductForm } from "./ProductForm";
 
 export function EditProduct({ id }: { id: string }) {
   const t = useTranslations("admin.form");
-  const product = useProduct(id);
+  const product = useProduct(id, { fresh: true });
 
   if (product.isPending) return <Skeleton label={t("loading")} count={2} height="h-64" />;
 

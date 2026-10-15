@@ -1,3 +1,4 @@
+import { titleFrom } from "@/lib/metadata";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Suspense } from "react";
 import { AuthCard } from "@/components/features/AuthCard";
@@ -16,3 +17,5 @@ export default async function SignInPage({ params }: { params: Promise<{ locale:
     </AuthCard>
   );
 }
+
+export const generateMetadata = titleFrom("auth.signIn", "title");

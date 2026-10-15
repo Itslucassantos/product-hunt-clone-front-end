@@ -19,7 +19,9 @@ export function SignInForm() {
   const t = useTranslations("auth");
   const tErrors = useTranslations("errors");
   const router = useRouter();
-  const redirectUrl = getSafeRedirectPath(useSearchParams().get("redirect_url"));
+  const searchParams = useSearchParams();
+  const redirectUrl = getSafeRedirectPath(searchParams.get("redirect_url"));
+  const sessionExpired = searchParams.get("reason") === "session-expired";
   const { signIn, fetchStatus } = useSignIn();
 
   const [email, setEmail] = useState("");
@@ -138,6 +140,7 @@ export function SignInForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
+      {sessionExpired && !errors.form && <Alert>{tErrors("SESSION_EXPIRED")}</Alert>}
       {errors.form && <Alert>{errors.form}</Alert>}
       <FormField
         label={t("email")}

@@ -34,13 +34,13 @@ function ToastItem({ toast, onClose }: { toast: ToastData; onClose: () => void }
   const t = useTranslations("common");
   const [paused, setPaused] = useState(false);
 
+  const isError = toast.kind === "error";
+
   useEffect(() => {
-    if (paused) return;
+    if (paused || isError) return;
     const timer = setTimeout(onClose, DURATION_MS);
     return () => clearTimeout(timer);
-  }, [paused, onClose]);
-
-  const isError = toast.kind === "error";
+  }, [paused, isError, onClose]);
 
   return (
     <li
@@ -49,7 +49,7 @@ function ToastItem({ toast, onClose }: { toast: ToastData; onClose: () => void }
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
-      className="pointer-events-auto flex items-center gap-3 rounded-2xl border border-border bg-surface py-1 pl-4 pr-1 shadow-lg"
+      className="pointer-events-auto flex animate-toast-in motion-reduce:animate-none items-center gap-3 rounded-2xl border border-border bg-surface py-1 pl-4 pr-1 shadow-lg"
     >
       <svg
         viewBox="0 0 24 24"
@@ -100,10 +100,13 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<ToastData[]>([]);
 
   const show = useCallback((kind: ToastKind, message: string) => {
-    setToasts((current) => [
-      ...current.slice(-(MAX_TOASTS - 1)),
-      { id: Date.now() + Math.random(), kind, message },
-    ]);
+    setToasts((current) => {
+      if (current.some((toast) => toast.kind === kind && toast.message === message)) return current;
+      return [
+        ...current.slice(-(MAX_TOASTS - 1)),
+        { id: Date.now() + Math.random(), kind, message },
+      ];
+    });
   }, []);
 
   const value = useMemo(() => ({ show }), [show]);

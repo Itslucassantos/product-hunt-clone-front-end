@@ -2,12 +2,11 @@
 
 import Image from "next/image";
 import { useFormatter, useTranslations } from "next-intl";
-import { Alert } from "@/components/ui/Alert";
+import { ErrorState } from "@/components/ui/ErrorState";
 import { useProduct } from "@/hooks/useProduct";
-import { useProducts } from "@/hooks/useProducts";
+import { useProductsByTopics } from "@/hooks/useProducts";
 import { Link } from "@/i18n/navigation";
 import { ApiRequestError } from "@/lib/api/errors";
-import { errorMessageKey } from "@/lib/api/error-message-key";
 import { ProductCard } from "./ProductCard";
 import { ProductImage } from "./ProductImage";
 import { StarRating } from "./StarRating";
@@ -16,9 +15,9 @@ import { VoteButton } from "./VoteButton";
 function Skeleton() {
   return (
     <div className="flex flex-col gap-8" aria-hidden="true">
-      <div className="h-5 w-48 animate-pulse rounded bg-tag" />
-      <div className="h-24 animate-pulse rounded-2xl bg-tag" />
-      <div className="h-72 animate-pulse rounded-2xl bg-tag" />
+      <div className="h-5 w-48 animate-pulse motion-reduce:animate-none rounded bg-tag" />
+      <div className="h-24 animate-pulse motion-reduce:animate-none rounded-2xl bg-tag" />
+      <div className="h-72 animate-pulse motion-reduce:animate-none rounded-2xl bg-tag" />
     </div>
   );
 }
@@ -39,13 +38,14 @@ function NotFound() {
 
 function RelatedProducts({
   productId,
-  topic,
+  topics,
 }: {
   productId: string;
-  topic: { slug: string; name: string };
+  topics: { slug: string; name: string }[];
 }) {
   const t = useTranslations("product");
-  const { data } = useProducts({ topic: topic.slug });
+  const format = useFormatter();
+  const { data } = useProductsByTopics(topics.map((topic) => topic.slug));
   const related = data?.filter((p) => p.id !== productId) ?? [];
 
   if (related.length === 0) return null;
@@ -53,7 +53,7 @@ function RelatedProducts({
   return (
     <section aria-labelledby="related" className="flex flex-col gap-3">
       <h2 id="related" className="font-display text-2xl font-extrabold">
-        {t("moreIn", { topics: topic.name })}
+        {t("moreIn", { topics: format.list(topics.map((topic) => topic.name)) })}
       </h2>
       <ul className="flex flex-col gap-3">
         {related.map((product) => (
@@ -73,14 +73,7 @@ export function ProductView({ id }: { id: string }) {
 
   if (isError) {
     if (error instanceof ApiRequestError && error.status === 404) return <NotFound />;
-    return (
-      <div className="flex flex-col items-start gap-2">
-        <Alert>{t(`errors.${errorMessageKey(error)}`)}</Alert>
-        <button type="button" onClick={() => refetch()} className="text-sm font-semibold underline">
-          {t("common.tryAgain")}
-        </button>
-      </div>
-    );
+    return <ErrorState error={error} onRetry={() => refetch()} />;
   }
 
   const comingSoon = product.status === "COMING_SOON";
@@ -133,12 +126,7 @@ export function ProductView({ id }: { id: string }) {
             {t("product.comingSoon")}
           </span>
         ) : (
-          <VoteButton
-            productId={product.id}
-            upvotes={product.upvotes}
-            size="lg"
-            redirectTo={`/products/${product.id}`}
-          />
+          <VoteButton productId={product.id} upvotes={product.upvotes} size="lg" />
         )}
       </header>
 
@@ -159,8 +147,8 @@ export function ProductView({ id }: { id: string }) {
             </p>
           </section>
 
-          {product.topics[0] && (
-            <RelatedProducts productId={product.id} topic={product.topics[0]} />
+          {product.topics.length > 0 && (
+            <RelatedProducts productId={product.id} topics={product.topics} />
           )}
         </div>
 

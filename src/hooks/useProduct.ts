@@ -2,14 +2,11 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useLocale } from "next-intl";
-import { getProduct } from "@/lib/api/endpoints";
+import { productQuery } from "@/lib/api/queries";
 import type { Locale } from "@/types/api";
 
-export function useProduct(id: string) {
+export function useProduct(id: string, { fresh = false } = {}) {
   const locale = useLocale() as Locale;
 
-  return useQuery({
-    queryKey: ["products", locale, id],
-    queryFn: () => getProduct(id, locale),
-  });
+  return useQuery(productQuery(locale, id, { fresh }));
 }

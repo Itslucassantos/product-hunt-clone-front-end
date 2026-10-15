@@ -9,6 +9,7 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { ErrorState } from "@/components/ui/ErrorState";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useToast } from "@/components/ui/Toast";
+import { useErrorToast } from "@/hooks/useErrorToast";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { Link } from "@/i18n/navigation";
 import {
@@ -18,7 +19,6 @@ import {
   reorderTopics,
   updateTopic,
 } from "@/lib/api/endpoints";
-import { errorMessageKey } from "@/lib/api/error-message-key";
 import { ApiRequestError } from "@/lib/api/errors";
 import type { Locale, Topic, TopicInUseDetails, TopicInput } from "@/types/api";
 import { EMPTY_TOPIC, TopicForm, type TopicFormValues } from "./TopicForm";
@@ -64,7 +64,7 @@ function ArrowButton({
 
 export function AdminTopicsView() {
   const t = useTranslations("admin.topics");
-  const tError = useTranslations("errors");
+  const errorToast = useErrorToast();
   const toast = useToast();
   const queryClient = useQueryClient();
   const getAuthToken = useAuthToken();
@@ -111,7 +111,7 @@ export function AdminTopicsView() {
       if (error instanceof ApiRequestError && error.code === "TOPIC_IN_USE") {
         setBlocked({ topic, details: error.details as TopicInUseDetails });
       } else {
-        toast.error(tError(errorMessageKey(error)));
+        errorToast(error);
       }
     },
   });
@@ -135,7 +135,7 @@ export function AdminTopicsView() {
       for (const [locale, data] of context?.previous ?? []) {
         queryClient.setQueryData(["topics", locale], data);
       }
-      toast.error(tError(errorMessageKey(error)));
+      errorToast(error);
       invalidate();
     },
     onSuccess: () => invalidate(),

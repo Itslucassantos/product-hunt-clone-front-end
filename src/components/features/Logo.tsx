@@ -5,7 +5,11 @@ export function Logo() {
   const t = useTranslations("header");
 
   return (
-    <Link href="/" aria-label={t("homeLabel")} className="flex items-center gap-3">
+    <Link
+      href="/"
+      aria-label={t("homeLabel")}
+      className="flex shrink-0 items-center gap-3 whitespace-nowrap"
+    >
       <span
         aria-hidden="true"
         className="flex h-[38px] w-[38px] items-center justify-center rounded-xl bg-primary text-white"

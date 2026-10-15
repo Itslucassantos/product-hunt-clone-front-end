@@ -9,11 +9,11 @@ import { ErrorState } from "@/components/ui/ErrorState";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { useToast } from "@/components/ui/Toast";
+import { useErrorToast } from "@/hooks/useErrorToast";
 import { useAdminProducts } from "@/hooks/useAdminProducts";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { Link } from "@/i18n/navigation";
 import { deleteProduct } from "@/lib/api/endpoints";
-import { errorMessageKey } from "@/lib/api/error-message-key";
 import type { AdminProduct } from "@/types/api";
 import { ProductImage } from "./ProductImage";
 import { StarRating } from "./StarRating";
@@ -41,7 +41,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 
 export function AdminProductsView() {
   const t = useTranslations("admin.products");
-  const tError = useTranslations("errors");
+  const errorToast = useErrorToast();
   const tHome = useTranslations("home");
   const toast = useToast();
   const queryClient = useQueryClient();
@@ -57,7 +57,7 @@ export function AdminProductsView() {
       setToDelete(null);
     },
     onError: (error) => {
-      toast.error(tError(errorMessageKey(error)));
+      errorToast(error);
       setToDelete(null);
     },
     onSettled: () => {
