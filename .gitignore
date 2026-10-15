@@ -60,3 +60,5 @@ pnpm-debug.log*
 
 # Project docs (local only)
 FRONTEND.md
+playwright-report
+test-results

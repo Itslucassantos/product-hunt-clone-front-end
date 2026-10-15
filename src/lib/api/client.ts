@@ -16,7 +16,9 @@ type RequestOptions = {
 export async function apiRequest<T>(path: string, options: RequestOptions = {}): Promise<T> {
   const { method = "GET", query, body, token, signal, fresh } = options;
 
-  const url = new URL(`/api${path}`, API_BASE_URL);
+  const baseUrl =
+    typeof window === "undefined" ? process.env.API_INTERNAL_URL || API_BASE_URL : API_BASE_URL;
+  const url = new URL(`/api${path}`, baseUrl);
   for (const [key, value] of Object.entries(query ?? {})) {
     if (value !== undefined) url.searchParams.set(key, value);
   }

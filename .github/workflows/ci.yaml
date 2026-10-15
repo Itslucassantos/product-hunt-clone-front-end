@@ -41,6 +41,9 @@ jobs:
       - name: Type check
         run: npm run typecheck
 
+      - name: Unit and component tests
+        run: npm test
+
       - name: Check translation keys match
         run: npm run check:messages
 

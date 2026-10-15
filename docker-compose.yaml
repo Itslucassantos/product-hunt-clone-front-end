@@ -1,0 +1,84 @@
+name: product-hunt-clone
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: product_hunt
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d product_hunt"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  migrate:
+    build:
+      context: ${BACKEND_CONTEXT:-../product-hunt-clone-backend}
+      target: migrate
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/product_hunt
+      REPOSITORY_DRIVER: prisma
+      CACHE_DRIVER: none
+      RATE_LIMIT_DRIVER: none
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
+  api:
+    build:
+      context: ${BACKEND_CONTEXT:-../product-hunt-clone-backend}
+      target: runtime
+    environment:
+      NODE_ENV: development
+      PORT: 3333
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/product_hunt
+      REPOSITORY_DRIVER: prisma
+      REDIS_URL: redis://redis:6379
+      CACHE_DRIVER: redis
+      RATE_LIMIT_DRIVER: redis
+      CORS_ORIGIN: http://localhost:3000
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY:?Set CLERK_SECRET_KEY in .env}
+      CLERK_AUTHORIZED_PARTIES: http://localhost:3000
+      CLERK_WEBHOOK_SECRET: ${CLERK_WEBHOOK_SECRET:-}
+      ADMIN_EXTERNAL_IDS: ${ADMIN_EXTERNAL_IDS:-}
+      PUBLIC_URL: http://localhost:3333
+    ports:
+      - "3333:3333"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_API_BASE_URL: http://localhost:3333
+        NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:?Set NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY in .env}
+    environment:
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY:?Set CLERK_SECRET_KEY in .env}
+      API_INTERNAL_URL: http://api:3333
+    ports:
+      - "3000:3000"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  pgdata:
