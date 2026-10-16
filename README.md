@@ -4,6 +4,8 @@ A Product Hunt clone built with **Next.js (App Router)**, **React**, **TypeScrip
 
 This repository contains only the frontend. It talks over HTTP to the separate **[product-hunt-clone-backend](https://github.com/Itslucassantos/product-hunt-clone-backend)** (Express 5, Prisma, PostgreSQL, Redis; all routes under `/api`), which has its own README with the full API reference.
 
+🎥 **Project walkthrough video:** [Watch on Google Drive](https://drive.google.com/file/d/1l5RupI_AJk0IOCgaUTkh2DUqEVefegto/view?usp=drive_link)
+
 ## Table of contents
 
 - [Features](#features)
