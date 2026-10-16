@@ -1,0 +1,322 @@
+{
+  "common": {
+    "appName": "P.H CLONE",
+    "tryAgain": "Tentar de novo",
+    "close": "Fechar",
+    "requestId": "ID da requisição: {id}",
+    "loadingProducts": "Carregando produtos…",
+    "loadingTopics": "Carregando tópicos…",
+    "retryIn": "Tentar de novo em {seconds}s",
+    "backToProducts": "Voltar aos produtos",
+    "unsavedChanges": "Você tem alterações não salvas. Sair sem salvar?"
+  },
+  "nav": {
+    "products": "Produtos",
+    "categories": "Categorias",
+    "about": "Sobre",
+    "logIn": "Entrar",
+    "signUp": "Registro",
+    "logOut": "Sair",
+    "admin": "Admin"
+  },
+  "header": {
+    "homeLabel": "P.H CLONE, página inicial",
+    "language": "Idioma",
+    "theme": "Modo escuro"
+  },
+  "footer": {
+    "tagline": "Projeto de portfólio · 2026"
+  },
+  "home": {
+    "title": "O Próximo Grande App",
+    "trending": "Tópicos em alta",
+    "allTopics": "Todos",
+    "products": "Produtos",
+    "empty": "Ainda não há produtos aqui.",
+    "reviewed": "Produtos revisados por nós",
+    "comingSoon": "Em breve",
+    "rating": "Nota {rating}/5",
+    "emptyTitle": "Nenhum produto encontrado",
+    "emptyTopic": "Ainda não há produtos neste tópico.",
+    "showAll": "Ver todos os produtos"
+  },
+  "errors": {
+    "INTERNAL_ERROR": "O servidor falhou ao processar esta requisição. Tente de novo; se continuar, informe o ID da requisição abaixo.",
+    "NETWORK_ERROR": "Não foi possível acessar o servidor. Verifique sua conexão.",
+    "auth": {
+      "invalidCredentials": "E-mail ou senha incorretos.",
+      "emailRequired": "Digite seu e-mail.",
+      "emailInvalid": "Digite um e-mail válido.",
+      "emailTaken": "Este e-mail já está cadastrado.",
+      "passwordRequired": "Digite sua senha.",
+      "passwordTooShort": "Use pelo menos 8 caracteres.",
+      "passwordPwned": "Esta senha apareceu em um vazamento de dados. Escolha outra.",
+      "passwordWeak": "Escolha uma senha mais forte. Evite palavras comuns e sequências simples.",
+      "codeRequired": "Digite o código.",
+      "codeIncorrect": "Código incorreto.",
+      "codeExpired": "O código expirou. Envie um novo.",
+      "tooManyRequests": "Muitas tentativas. Tente de novo em instantes.",
+      "unknown": "Algo deu errado. Tente de novo."
+    },
+    "UNAUTHENTICATED": "Entre para continuar.",
+    "SESSION_EXPIRED": "Sua sessão expirou. Entre de novo.",
+    "PRODUCT_NOT_FOUND": "Produto não encontrado.",
+    "PRODUCT_NOT_VOTABLE": "Este produto ainda não pode receber votos.",
+    "RATE_LIMITED": "Muitas requisições. Tente de novo em instantes.",
+    "FORBIDDEN": "Você não tem permissão para fazer isso.",
+    "VALIDATION_ERROR": "Alguns campos são inválidos.",
+    "MALFORMED_REQUEST": "Não foi possível entender a requisição.",
+    "INVALID_TOPIC_ORDER": "Não foi possível salvar a ordem dos tópicos.",
+    "TOPIC_NOT_FOUND": "Tópico não encontrado.",
+    "REVIEW_NOT_FOUND": "Revisão não encontrada.",
+    "ROUTE_NOT_FOUND": "Página não encontrada.",
+    "TOPIC_ALREADY_EXISTS": "Já existe um tópico com esse nome.",
+    "TOPIC_IN_USE": "Este tópico ainda está em uso.",
+    "IMAGE_TOO_LARGE": "A imagem é grande demais (até 5 MB).",
+    "UNSUPPORTED_IMAGE_TYPE": "Use uma imagem PNG ou JPG.",
+    "UPSTREAM_ERROR": "Um serviço de que dependemos falhou. Tente de novo.",
+    "SERVICE_UNAVAILABLE": "O serviço está indisponível. Tente de novo em instantes.",
+    "fields": {
+      "REQUIRED": "Este campo é obrigatório.",
+      "INVALID_URL": "Digite uma URL válida, começando com https://.",
+      "TOO_LONG": "Texto longo demais.",
+      "TOO_SHORT": "Texto curto demais.",
+      "OUT_OF_RANGE": "Escolha uma nota de 1 a 5.",
+      "ALREADY_EXISTS": "Isso já existe.",
+      "MISSING_TRANSLATION": "Digite o nome nos dois idiomas.",
+      "INVALID_VALUE": "Este valor não é válido."
+    },
+    "PRODUCT_ALREADY_EXISTS": "Já existe um produto com esse nome. Escolha outro nome.",
+    "USER_NOT_FOUND": "Seu usuário não foi encontrado no backend. Saia e entre de novo.",
+    "RATE_LIMITED_RETRY": "Muitas requisições. Tente de novo em {seconds, plural, one {# segundo} other {# segundos}}."
+  },
+  "auth": {
+    "email": "E-mail",
+    "password": "Senha",
+    "code": "Código de verificação",
+    "signIn": {
+      "title": "Entrar",
+      "subtitle": "Que bom ver você de novo.",
+      "submit": "Entrar",
+      "submitting": "Entrando…",
+      "noAccount": "Não tem conta?",
+      "createOne": "Crie uma",
+      "codeSent": "Este é um dispositivo novo. Enviamos um código para {email}. Digite-o para continuar.",
+      "verify": "Verificar e entrar",
+      "verifying": "Verificando…",
+      "resend": "Enviar novo código"
+    },
+    "signUp": {
+      "title": "Crie sua conta",
+      "subtitle": "Vote nos produtos que você gosta.",
+      "submit": "Criar conta",
+      "submitting": "Criando conta…",
+      "passwordHint": "Pelo menos 8 caracteres.",
+      "haveAccount": "Já tem conta?",
+      "logIn": "Entrar",
+      "codeSent": "Enviamos um código para {email}. Digite-o para confirmar seu e-mail.",
+      "verify": "Verificar e-mail",
+      "verifying": "Verificando…",
+      "resend": "Enviar novo código"
+    }
+  },
+  "vote": {
+    "add": "Votar ({count})",
+    "remove": "Remover voto ({count})",
+    "signInToVote": "Entre para votar ({count})"
+  },
+  "categories": {
+    "title": "Categorias",
+    "subtitle": "Explore os produtos por tópico.",
+    "productCount": "{count, plural, one {# produto} other {# produtos}}",
+    "mostVoted": "Mais votados em {topic}",
+    "noProducts": "Ainda não há produtos nesta categoria.",
+    "empty": "Ainda não há categorias.",
+    "emptyTitle": "Nenhum produto nesta categoria"
+  },
+  "about": {
+    "title": "Sobre o P.H CLONE",
+    "intro": "O P.H CLONE é um lugar para descobrir novos apps e ferramentas. Os produtos são publicados pela administração, organizados por tópico e ordenados pelos votos da comunidade.",
+    "howItWorks": "Como funciona",
+    "steps": {
+      "publish": {
+        "title": "Produtos são publicados",
+        "text": "A administração publica os produtos, agrupa por tópico e revisa alguns deles com uma nota. Os que ainda vão chegar aparecem como em breve."
+      },
+      "vote": {
+        "title": "Você vota",
+        "text": "Entre na sua conta e vote nos produtos de que gosta. Você tem um voto por produto e pode retirá-lo quando quiser."
+      },
+      "reorder": {
+        "title": "A lista se reordena",
+        "text": "Os votos decidem a ordem: os produtos mais votados vêm primeiro, e a lista se atualiza assim que você vota."
+      }
+    },
+    "portfolio": {
+      "title": "Um projeto de portfólio",
+      "text": "O P.H CLONE é um projeto full-stack de portfólio: um front-end em Next.js conversando com uma API em Express, com as regras de negócio separadas dos frameworks.",
+      "frontend": "Front-end",
+      "backend": "Back-end",
+      "shared": "Autenticação e arquitetura"
+    },
+    "cta": {
+      "title": "Pronto para escolher seus favoritos?",
+      "text": "Crie uma conta para votar nos produtos de que gosta, ou apenas veja o que a comunidade está votando.",
+      "signUp": "Registro",
+      "viewProducts": "Ver produtos"
+    }
+  },
+  "product": {
+    "breadcrumb": "Caminho",
+    "visitSite": "Visitar site",
+    "about": "Sobre o produto",
+    "moreIn": "Mais em {topics}",
+    "details": "Detalhes",
+    "votes": "Votos",
+    "publishedOn": "Publicado em",
+    "website": "Site",
+    "topics": "Tópicos",
+    "reviewedByUs": "Revisado por nós",
+    "comingSoon": "Em breve",
+    "comingSoonNote": "A votação abre quando o produto for publicado.",
+    "noDescription": "Ainda sem descrição.",
+    "notFoundTitle": "Produto não encontrado",
+    "notFoundText": "Este produto não existe ou foi removido.",
+    "backToProducts": "Voltar aos produtos"
+  },
+  "admin": {
+    "checking": "Verificando acesso…",
+    "badge": "Admin",
+    "navLabel": "Admin",
+    "tabs": {
+      "products": "Produtos",
+      "topics": "Tópicos",
+      "viewSite": "Ver site"
+    },
+    "products": {
+      "title": "Produtos",
+      "new": "Novo produto",
+      "filters": "Filtrar produtos",
+      "filter": {
+        "all": "Todos",
+        "published": "Publicados",
+        "comingSoon": "Em breve",
+        "reviewed": "Revisados"
+      },
+      "loading": "Carregando produtos…",
+      "emptyTitle": "Nenhum produto aqui",
+      "emptyText": "Nada corresponde a este filtro ainda.",
+      "topics": "Tópicos",
+      "status": "Situação",
+      "review": "Revisão",
+      "noReview": "Sem revisão",
+      "votes": "Votos",
+      "edit": "Editar",
+      "delete": "Excluir",
+      "editLabel": "Editar {name}",
+      "deleteLabel": "Excluir {name}",
+      "cancel": "Cancelar",
+      "deleted": "“{name}” foi excluído.",
+      "deleteTitle": "Excluir “{name}”?",
+      "deleteBody": "{votes, plural, one {O # voto também será excluído} other {Os # votos também serão excluídos}}.",
+      "deleteBodyReview": "{votes, plural, one {O # voto} other {Os # votos}} e a revisão também serão excluídos."
+    },
+    "form": {
+      "back": "Voltar aos produtos",
+      "newTitle": "Novo produto",
+      "editTitle": "Editar produto",
+      "loading": "Carregando produto…",
+      "notFound": "Produto não encontrado",
+      "fixFields": "{count, plural, one {Corrija # campo para salvar este produto} other {Corrija # campos para salvar este produto}}",
+      "details": "Detalhes",
+      "image": "Imagem",
+      "chooseImage": "Escolher imagem",
+      "changeImage": "Trocar imagem",
+      "removeImage": "Remover imagem",
+      "imageHint": "PNG ou JPG, até 5 MB. Sem imagem, o produto mostra a inicial.",
+      "uploading": "Enviando imagem",
+      "name": "Nome",
+      "shortDescription": "Descrição curta",
+      "shortDescriptionHint": "Aparece nas listas de produtos.",
+      "fullDescription": "Descrição completa",
+      "fullDescriptionHint": "Aparece na página do produto.",
+      "site": "Site",
+      "siteHint": "Deve começar com https://",
+      "topics": "Tópicos",
+      "loadingTopics": "Carregando tópicos…",
+      "retry": "Tentar de novo",
+      "publishing": "Publicação",
+      "published": "Publicado",
+      "comingSoon": "Em breve",
+      "publishingHint": "“Em breve” coloca o produto na coluna Em breve e desliga os votos.",
+      "review": "Revisão",
+      "reviewedByUs": "Revisado por nós",
+      "rating": "Nota",
+      "ratingOption": "Nota {rating} de 5",
+      "reviewSummary": "Resumo da revisão",
+      "save": "Salvar alterações",
+      "saving": "Salvando…",
+      "saved": "Produto salvo.",
+      "cancel": "Cancelar",
+      "errors": {
+        "imageType": "A imagem deve ser PNG ou JPG.",
+        "imageSize": "A imagem pode ter até 5 MB.",
+        "imageUpstream": "Não foi possível enviar a imagem. Tente de novo.",
+        "chooseTopic": "Escolha pelo menos um tópico.",
+        "topicRemoved": "Um tópico selecionado foi removido. Revise sua escolha."
+      },
+      "steps": {
+        "upload": "Não foi possível enviar a imagem. Nada foi salvo.",
+        "product": "Não foi possível salvar o produto.",
+        "review": "O produto foi salvo, mas a revisão não pôde ser salva."
+      }
+    },
+    "topics": {
+      "title": "Tópicos",
+      "new": "Novo tópico",
+      "newTitle": "Novo tópico",
+      "editTitle": "Editar tópico",
+      "english": "Inglês",
+      "portuguese": "Português",
+      "name": "Nome",
+      "description": "Descrição",
+      "slug": "Slug",
+      "slugHint": "Gerado a partir do nome em inglês. Nunca muda depois que o tópico é criado.",
+      "save": "Salvar tópico",
+      "saving": "Salvando…",
+      "saved": "Tópico salvo.",
+      "cancel": "Cancelar",
+      "loading": "Carregando tópicos…",
+      "emptyTitle": "Nenhum tópico ainda",
+      "emptyText": "Crie o primeiro tópico para organizar os produtos.",
+      "products": "Produtos",
+      "moveUp": "Subir {name}",
+      "moveDown": "Descer {name}",
+      "edit": "Editar",
+      "delete": "Excluir",
+      "editLabel": "Editar {name}",
+      "deleteLabel": "Excluir {name}",
+      "deleted": "“{name}” foi excluído.",
+      "deleteTitle": "Excluir “{name}”?",
+      "deleteBody": "Este tópico será removido de todos os produtos que o usam.",
+      "blockedTitle": "“{name}” ainda não pode ser excluído",
+      "blockedBody": "{count, plural, one {# produto ficaria} other {# produtos ficariam}} sem tópico. Todo produto precisa de pelo menos um. Dê outro tópico a eles primeiro.",
+      "gotIt": "Entendi",
+      "viewProducts": "Ver produtos",
+      "andMore": "e mais {count}"
+    }
+  },
+  "errorScreens": {
+    "generic": "Algo deu errado",
+    "offline": "Você está sem conexão",
+    "unauthenticated": "Entre para continuar",
+    "sessionExpired": "Sua sessão expirou",
+    "forbidden": "Você não tem permissão",
+    "notFound": "Página não encontrada",
+    "rateLimited": "Muitas requisições",
+    "serverError": "Erro no servidor",
+    "unavailable": "Serviço indisponível",
+    "upstream": "Um serviço falhou",
+    "notFoundText": "A página que você procura não existe ou foi movida."
+  }
+}
