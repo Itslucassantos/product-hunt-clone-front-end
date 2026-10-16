@@ -12,12 +12,10 @@ import "@/styles/globals.css";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["600", "800"],
   variable: "--font-bricolage",
 });
 const instrument = Instrument_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
   variable: "--font-instrument",
 });
 
