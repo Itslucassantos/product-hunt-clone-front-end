@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState, type FormEvent } from "react";
@@ -111,9 +112,13 @@ export function ProductForm({ product }: { product?: ProductDetail }) {
   };
 
   const errorEntries = Object.entries(errors) as [FieldKey, string][];
+  const errorCount = errorEntries.length;
+  const focusedAttemptRef = useRef(0);
   useEffect(() => {
-    if (attempt > 0 && errorEntries.length > 0) summaryRef.current?.focus();
-  }, [attempt]);
+    if (attempt === focusedAttemptRef.current || errorCount === 0) return;
+    focusedAttemptRef.current = attempt;
+    summaryRef.current?.focus();
+  }, [attempt, errorCount]);
 
   const labels: Record<FieldKey, string> = {
     image: t("image"),
@@ -349,8 +354,14 @@ export function ProductForm({ product }: { product?: ProductDetail }) {
               <span className="text-sm font-semibold">{t("image")}</span>
               <div className="flex flex-wrap items-center gap-4">
                 {shownImage ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={shownImage} alt="" className="h-24 w-24 rounded-2xl object-cover" />
+                  <Image
+                    src={shownImage}
+                    alt=""
+                    width={96}
+                    height={96}
+                    unoptimized
+                    className="h-24 w-24 rounded-2xl object-cover"
+                  />
                 ) : (
                   <span
                     aria-hidden="true"

@@ -1,0 +1,16 @@
+node_modules
+.next
+coverage
+.git
+.github
+.env
+.env.*
+!.env.example
+e2e
+test-results
+playwright-report
+*.md
+Dockerfile
+docker-compose.yaml
+.dockerignore
+tsconfig.tsbuildinfo
